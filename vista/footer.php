@@ -89,5 +89,144 @@ seccion de modals
 
   });
 </script>
+
+<!--validacion para traspaso/ingreso-->
+<script>
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        regTraspaso()
+      }
+    });
+
+    $('#FRegTraspaso').validate({
+      rules: {
+        dirPaciente: {
+          required: true,
+          minlength: 3
+        },
+        procPaciente: {
+          required: true,
+          minlength: 3
+        },
+        lugNacimiento: {
+          required: true,
+          minlength: 3
+        },
+        provPaciente: {
+          required: true,
+          minlength: 3
+        },
+        ocupaPaciente: {
+          required: true,
+          minlength: 3
+        },
+        diagnostico: {
+          required: true,
+          minlength: 3
+        },
+        medInternacion: {
+          required: true,
+          minlength: 3
+        },
+        matMedico: {
+          required: true,
+          minlength: 3
+        },
+        enviadoDe: {
+          required: true,
+          minlength: 3
+        },
+
+      },
+
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+</script>
+
+<!--validacion para historia clinica en sala-->
+<script>
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        regHisClinica()
+      }
+    });
+
+    $('#FRegHisClinica').validate({
+      rules: {
+        fuente_historia: {
+          required: true,
+        },
+        motivo_consulta: {
+          required: true,
+        },
+        anamnesis: {
+          required: true,
+        },
+        antecedentes: {
+          required: true,
+        },
+        revision_sistemas: {
+          required: true,
+        },
+        fecha: {
+          required: true,
+        },
+        hora: {
+          required: true,
+        },
+        p_actual: {
+          required: true,
+        },
+        talla: {
+          required: true,
+        },
+        pulso: {
+          required: true,
+        },
+        frec_respiratoria: {
+          required: true,
+        },
+        presion_max: {
+          required: true,
+        },
+        presion_min: {
+          required: true,
+        },
+        examen_general: {
+          required: true,
+        },
+        examen_regional: {
+          required: true,
+        },
+      },
+
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+</script>
+
 </body>
 </html>

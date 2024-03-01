@@ -4,6 +4,7 @@ $ruta=parse_url($_SERVER["REQUEST_URI"]);
 if(isset($ruta["query"])){
   if($ruta["query"]=="ctrRegPaciente"||
      $ruta["query"]=="ctrEditPaciente"||
+     $ruta["query"]=="ctrRegHisClinica"||
      $ruta["query"]=="ctrEliPaciente"){
     $metodo=$ruta["query"];
     $Paciente=new ControladorPaciente();
@@ -28,7 +29,7 @@ class ControladorPaciente{
     $hora=date("H-i-s");
 
     $fechaHora=$fecha." ".$hora;
-    
+
     $data=array(
       "nomPaciente"=>$_POST["nomPaciente"],
       "patPaciente"=>$_POST["patPaciente"],
@@ -106,5 +107,46 @@ class ControladorPaciente{
 
     $respuesta=ModeloPaciente::mdlBusPaciente($nitPaciente);
     echo json_encode($respuesta);
+  }
+
+  /*=======================
+historia clinica en sala
+========================*/
+  static function ctrRegHisClinica(){
+    require "../modelo/pacienteModelo.php";
+    $data = array(
+      "fuente_historia" => $_POST["fuente_historia"],
+      "idPaciente" => $_POST["idPaciente"],
+      "motivo_consulta" => $_POST["motivo_consulta"],
+      "anamnesis" => $_POST["anamnesis"],
+      "antecedentes" => $_POST["antecedentes"],
+      "revision_sistemas" => $_POST["revision_sistemas"],
+      "fecha" => $_POST["fecha"],
+      "hora" => $_POST["hora"],
+      "p_actual" => $_POST["p_actual"],
+      "talla" => $_POST["talla"],
+      "auxiliar" => $_POST["auxiliar"],
+      "bucal" => $_POST["bucal"],
+      "rectal" => $_POST["rectal"],
+      "pulso" => $_POST["pulso"],
+      "frec_respiratoria" => $_POST["frec_respiratoria"],
+      "presion_max" => $_POST["presion_max"],
+      "presion_min" => $_POST["presion_min"],
+      "examen_general" => $_POST["examen_general"],
+      "examen_regional" => $_POST["examen_regional"]
+    );
+
+    $respuesta=ModeloPaciente::mdlRegHisClinica($data);
+
+    echo $respuesta;
+  }
+
+  static function ctrEditHistClinica(){
+
+  }
+
+  static function ctrInfoHistorias(){
+    $respuesta=ModeloPaciente::mdlInfoHistorias();
+    return $respuesta;
   }
 }

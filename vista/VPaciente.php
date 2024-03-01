@@ -33,8 +33,8 @@
             </thead>
             <tbody>
               <?php
-              $cliente=ControladorPaciente::ctrInfoPacientes();
-              foreach($cliente as $value){
+              $paciente=ControladorPaciente::ctrInfoPacientes();
+              foreach($paciente as $value){
               ?>
 
               <tr>
@@ -43,7 +43,7 @@
                 <td><?php echo $value["num_sus"];?></td>
                 <td><?php echo $value["sexo_paciente"];?></td>
                 <td>
-                <?php 
+                  <?php 
                 if($value["estado_paciente"]==1){
                   ?>
                   <span class="badge badge-success">Activo</span>
@@ -54,6 +54,7 @@
                   <?php
                 }
                   ?>
+                </td>
                 <td>
                   <div class="btn-group">
                     <button class="btn btn-info" onclick="MVerPaciente(<?php echo $value["id_paciente"];?>)">
@@ -65,6 +66,17 @@
                     <button class="btn btn-danger" onclick="MEliPaciente(<?php echo $value["id_paciente"];?>)">
                       <i class="fas fa-trash"></i>
                     </button>
+
+                    <button class="btn btn-sm dropdown-toggle" data-toggle="dropdown"></button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="FTraspaso?<?php echo $value['id_paciente']; ?>" class="dropdown-item">Traspaso</a>
+                      </li>
+                      <li>
+                        <a href="FHisClinica?<?php echo $value['id_paciente']; ?>" class="dropdown-item">H. Clínica</a>
+                      </li>
+                    </ul>
+
                   </div>
                 </td>
               </tr>

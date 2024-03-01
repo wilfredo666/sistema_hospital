@@ -163,3 +163,49 @@ function MEliPaciente(id){
     }
   })
 }
+
+/*=======================
+historia clinica en sala
+========================*/
+function regHisClinica(){
+    var formData=new FormData($("#FRegHisClinica")[0])
+
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrRegHisClinica",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+
+      if(data="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'Historia registrada',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+    }
+
+  })
+}
+
+function MEliHistoria(id){
+
+}

@@ -103,4 +103,76 @@ class ModeloPaciente{
     $stmt->close();
     $stmt->null();
   }
+
+  /*=======================
+historia clinica en sala
+========================*/
+  static public function mdlRegHisClinica($data){
+
+    $fuente_historia = $data["fuente_historia"];
+    $idPaciente = $data["idPaciente"];
+    $motivo_consulta = $data["motivo_consulta"];
+    $anamnesis = $data["anamnesis"];
+    $antecedentes = $data["antecedentes"];
+    $revision_sistemas = $data["revision_sistemas"];
+    $fecha = $data["fecha"];
+    $hora = $data["hora"];
+    $p_actual = $data["p_actual"];
+    $talla = $data["talla"];
+    $auxiliar = $data["auxiliar"];
+    $bucal = $data["bucal"];
+    $rectal = $data["rectal"];
+    $pulso = $data["pulso"];
+    $frec_respiratoria = $data["frec_respiratoria"];
+    $presion_max = $data["presion_max"];
+    $presion_min = $data["presion_min"];
+    $examen_general = $data["examen_general"];
+    $examen_regional = $data["examen_regional"];
+
+    $stmt=Conexion::conectar()->prepare("INSERT INTO historia (id_paciente, fuente_historia, motivo_consulta, anamnesis, antecedentes, revision_sistema, fecha_historia, hora_historia, precion_actual, talla, tmp_auxiliar, tmp_bucal, tmp_rectal, pulso, frec_respiratoria, presion_max, presion_min, exm_fis_general, exm_fis_regional) VALUES ($idPaciente, '$fuente_historia', '$motivo_consulta', '$anamnesis', '$antecedentes', '$revision_sistemas', '$fecha', '$hora', '$p_actual', $talla, '$auxiliar', '$bucal', '$rectal', $pulso, $frec_respiratoria, $presion_max, $presion_min, '$examen_general', '$examen_regional')");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+
+  }
+
+  static public function mdlEditHisClinica($data){
+    "SET 
+    fuente_historia = '$fuente_historia',
+    motivo_consulta = '$motivo_consulta',
+    anamnesis = '$anamnesis',
+    antecedentes = '$antecedentes',
+    revision_sistema = '$revision_sistemas',
+    fecha_historia = '$fecha',
+    hora_historia = '$hora',
+    precion_actual = '$p_actual',
+    talla = $talla,
+    tmp_auxiliar = '$auxiliar',
+    tmp_bucal = '$bucal',
+    tmp_rectal = '$rectal',
+    pulso = $pulso,
+    frec_respiratoria = $frec_respiratoria,
+    presion_max = $presion_max,
+    presion_min = $presion_min,
+    exm_fis_general = '$examen_general',
+    exm_fis_regional = '$examen_regional'
+WHERE id_historia = $id_historia";
+  }
+
+  static public function mdlInfoHistorias(){
+    $stmt=Conexion::conectar()->prepare("select id_historia, num_historia_clinica, nombre_paciente, ap_pat_paciente, ap_mat_paciente, fecha_nacimiento, fecha_historia, hora_historia from historia JOIN paciente ON paciente.id_paciente=historia.id_paciente");
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
 }

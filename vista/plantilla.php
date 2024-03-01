@@ -29,6 +29,10 @@ session_start();
 
       if($_GET["ruta"]=="inicio"||
          $_GET["ruta"]=="VPaciente"||
+         $_GET["ruta"]=="FTraspaso"||
+         $_GET["ruta"]=="FHisClinica"||
+         $_GET["ruta"]=="FEditHistoria"||
+         $_GET["ruta"]=="VHistoria"||
          $_GET["ruta"]=="salir"||
          $_GET["ruta"]=="VUsuario"){
         include "asideMenu.php";

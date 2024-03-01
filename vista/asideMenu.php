@@ -95,9 +95,9 @@ with font-awesome or any other icon font library -->
                 </li>
                 
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="VHistoria" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Historia</p>
+                    <p>Historias Clínicas</p>
                   </a>
                 </li>
                 

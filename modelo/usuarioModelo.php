@@ -86,4 +86,5 @@ class ModeloUsuario{
     $stmt->close();
     $stmt->null();
   }
+
 }
