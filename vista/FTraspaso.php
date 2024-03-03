@@ -23,9 +23,9 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
 
       <div class="card card-primary">
         <div class="card-header">
-          <h4>Ejecutar traspaso/ingreso</h4>
+          <h4>Ejecutar Ingreso/Traspaso/Egreso</h4>
         </div>
-        <form action="" id="FRegPaciente">
+        <form action="POST" id="FRegTraspaso">
           <div class="card-body">
             <div class="row border-bottom">
               <table class="table">
@@ -52,13 +52,14 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="">Ingreso</label>
-                      <input type="date" class="form-control" name="hisClinica" id="hisClinica">
+                      <input type="date" class="form-control" name="fIngreso" id="fIngreso">
+                      <input type="hidden" name="idPaciente" id="idPaciente" value="<?php echo $id;?>">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="">Egreso</label>
-                      <input type="date" class="form-control" name="numSus" id="numSus">
+                      <input type="date" class="form-control" name="fEgreso" id="fEgreso">
                     </div>
                   </div>
                 </fieldset>
@@ -70,13 +71,13 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="">Ingreso</label>
-                      <input type="time" class="form-control" name="hisClinica" id="hisClinica">
+                      <input type="time" class="form-control" name="hIngreso" id="hIngreso">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="">Egreso</label>
-                      <input type="time" class="form-control" name="numSus" id="numSus">
+                      <input type="time" class="form-control" name="hEgreso" id="hEgreso">
                     </div>
                   </div>
                 </fieldset>
@@ -84,20 +85,20 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="">Servicio</label>
-                  <input type="text" class="form-control" name="nacPaciente" id="nacPaciente">
+                  <input type="text" class="form-control" name="servicio" id="servicio">
                 </div>
               </div>
 
               <div class="col-sm-1">
                 <div class="form-group">
                   <label for="">Sala</label>
-                  <input type="text" class="form-control" name="nacPaciente" id="nacPaciente">
+                  <input type="text" class="form-control" name="sala" id="sala">
                 </div>
               </div>
               <div class="col-sm-1">
                 <div class="form-group">
                   <label for="">Cama</label>
-                  <input type="text" class="form-control" id="estCivil" name="estCivil">
+                  <input type="text" class="form-control" id="cama" name="cama">
                 </div>
               </div>
             </div>
@@ -107,9 +108,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="">Operaciones</label>
-                  <textarea name="" id="" class="form-control" name="dirPaciente" id="dirPaciente" placeholder="Direccion del paciente u otra persona de referencia">
-
-                  </textarea>
+                  <textarea class="form-control" name="operaciones" id="operaciones"></textarea>
 
                 </div>
               </div>
@@ -117,9 +116,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="">Diagnostico</label>
-                  <textarea name="" id="" class="form-control" name="dirPaciente" id="dirPaciente" placeholder="Direccion del paciente u otra persona de referencia">
-
-                  </textarea>
+                  <textarea class="form-control" name="diagnostigo" id="diagnostigo"></textarea>
 
                 </div>
               </div>
@@ -127,9 +124,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="">Otro diagnostico</label>
-                  <textarea name="" id="" class="form-control" name="dirPaciente" id="dirPaciente" placeholder="Direccion del paciente u otra persona de referencia">
-
-                  </textarea>
+                  <textarea class="form-control" name="otroDiagnostico" id="otroDiagnostico"></textarea>
 
                 </div>
               </div>
@@ -137,9 +132,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="">Causas externas</label>
-                  <textarea name="" id="" class="form-control" name="dirPaciente" id="dirPaciente" placeholder="Direccion del paciente u otra persona de referencia">
-
-                  </textarea>
+                  <textarea class="form-control" name="causasExternas" id="causasExternas"></textarea>
 
                 </div>
               </div>
@@ -150,13 +143,16 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="">Num. dias de estadia</label>
-                  <input type="text" class="form-control" name="lugNacimiento" id="lugNacimiento" placeholder="Pueblo o municipio donde nacio">
+                  <input type="text" class="form-control" name="numDiasEstadia" id="numDiasEstadia">
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="">Condiciones de egreso</label>
-                  <input type="text" class="form-control" name="provPaciente" id="provPaciente" placeholder="Lugar de residencia actual del paciente">
+                  <select name="condEgreso" id="condEgreso" class="form-control">
+                    <option value="vivo">Vivo</option>
+                    <option value="muerto">Muerto</option>
+                  </select>
                 </div>
               </div>
               <div class="col-sm-4">
@@ -164,21 +160,14 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
                   <label for="">Causas de alta</label>
 
                   <?php
-                  $departamentos = array(
-                    "La Paz" => "La Paz",
-                    "Oruro" => "Oruro",
-                    "Potosi" => "Postosi",
-                    "Cochabamba" => "Cochabamba",
-                    "Chuquisaca" => "Chuquisaca",
-                    "Tarija" => "Tarija",
-                    "Pando" => "Pando",
-                    "Beni" => "Beni",
-                    "Santa Cruz" => "Santa Cruz"
+                  $causasAlta = array(
+                    "Fuga" => "Fuga",
+                    "Recuperacion" => "Recuperacion",
                   );
                   ?>
-                  <select name="depPaciente" id="depPaciente" class="form-control">
+                  <select name="causaAlta" id="causaAlta" class="form-control">
                     <?php
-                    foreach($departamentos as $value){
+                    foreach($causasAlta as $value){
                     ?>
                     <option value="<?php echo $value;?>"><?php echo $value;?></option>
                     <?php
@@ -194,7 +183,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="">Recien nacido</label>
-                  <input type="text" class="form-control" name="ocupaPaciente" id="ocupaPaciente">
+                  <input type="text" class="form-control" name="recienNacido" id="recienNacido">
                 </div>
               </div>
               <div class="col-sm-2">
@@ -206,7 +195,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
                     "mellizos"=>"mellizos"
                   );
                   ?>
-                  <select name="instPaciente" id="instPaciente" class="form-control">
+                  <select name="tipoNacido" id="tipoNacido" class="form-control">
                     <?php
                     foreach($tipo as $value){
                     ?>
@@ -220,7 +209,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="">Sexo</label>
-                  <select name="" id="" class="form-control">
+                  <select name="sexoNacido" id="sexoNacido" class="form-control">
                     <option value="masculino">Masculino</option>
                     <option value="femenino">Femenino</option>
                   </select>
@@ -229,7 +218,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="">Condiciones al nacer</label>
-                  <select name="" id="" class="form-control">
+                  <select name="condNacer" id="condNacer" class="form-control">
                     <option value="vivo">Vivo</option>
                     <option value="muerto">Muerto</option>
                   </select>
@@ -238,39 +227,29 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="">Peso en gramos</label>
-                  <input type="text" class="form-control" name="medInternacion" id="medInternacion">
+                  <input type="text" class="form-control" name="pesoNacido" id="pesoNacido">
                 </div>
               </div>
             </fieldset>
             <div class="row">
-
-
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <label for="">Condicion de ingreso</label>
-                  <select name="" id="" class="form-control">
-                    <option value="vivo">Vivo</option>
-                    <option value="muerto">Muerto</option>
-                  </select>
-                </div>
-              </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="">Nombre de medico:</label>
-                  <input type="text" class="form-control" name="enviadoDe" id="enviadoDe">
+                  <input type="text" class="form-control" name="nomMedico" id="nomMedico">
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="">Numero de matricula:</label>
-                  <input type="text" class="form-control" name="enviadoDe" id="enviadoDe">
+                  <input type="text" class="form-control" name="matrMedico" id="matrMedico">
                 </div>
+              </div>
+              <div class="col-sm-4">
               </div>
             </div>
 
           </div>
           <div class="card-footer">
-
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
 

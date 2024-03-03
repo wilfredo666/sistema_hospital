@@ -66,7 +66,7 @@ seccion de modals
 <div class="modal fade" id="modal-xl">
   <div class="modal-dialog modal-xl">
     <div class="modal-content" id="content-xl">
-     
+
     </div>
     <!-- /.modal-content -->
   </div>
@@ -101,43 +101,42 @@ seccion de modals
 
     $('#FRegTraspaso').validate({
       rules: {
-        dirPaciente: {
-          required: true,
-          minlength: 3
+        fIngreso: {
+          required: true
         },
-        procPaciente: {
-          required: true,
-          minlength: 3
+        hIngreso: {
+          required: true
         },
-        lugNacimiento: {
-          required: true,
-          minlength: 3
+        servicio: {
+          required: true
         },
-        provPaciente: {
-          required: true,
-          minlength: 3
+        sala: {
+          required: true
         },
-        ocupaPaciente: {
-          required: true,
-          minlength: 3
+        cama: {
+          required: true
         },
-        diagnostico: {
-          required: true,
-          minlength: 3
+        operaciones: {
+          required: true
         },
-        medInternacion: {
-          required: true,
-          minlength: 3
+        diagnostigo: {
+          required: true
         },
-        matMedico: {
-          required: true,
-          minlength: 3
+        otroDiagnostico: {
+          required: true
         },
-        enviadoDe: {
-          required: true,
-          minlength: 3
+        causasExternas: {
+          required: true
         },
-
+        numDiasEstadia: {
+          required: true
+        },
+        nomMedico: {
+          required: true
+        },
+        matrMedico: {
+          required: true
+        }
       },
 
       errorElement: 'span',
@@ -227,6 +226,80 @@ seccion de modals
     });
   });
 </script>
+
+<!--validacion para actualizar historia clinica en sala-->
+<script>
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        editHisClinica()
+      }
+    });
+
+    $('#FEditHisClinica').validate({
+      rules: {
+        fuente_historia: {
+          required: true,
+        },
+        motivo_consulta: {
+          required: true,
+        },
+        anamnesis: {
+          required: true,
+        },
+        antecedentes: {
+          required: true,
+        },
+        revision_sistemas: {
+          required: true,
+        },
+        fecha: {
+          required: true,
+        },
+        hora: {
+          required: true,
+        },
+        p_actual: {
+          required: true,
+        },
+        talla: {
+          required: true,
+        },
+        pulso: {
+          required: true,
+        },
+        frec_respiratoria: {
+          required: true,
+        },
+        presion_max: {
+          required: true,
+        },
+        presion_min: {
+          required: true,
+        },
+        examen_general: {
+          required: true,
+        },
+        examen_regional: {
+          required: true,
+        },
+      },
+
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>

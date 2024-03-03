@@ -88,9 +88,9 @@ with font-awesome or any other icon font library -->
                 </li>
                 
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="VTraspaso" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Traslados</p>
+                    <p>Ingresos/Traslados/Egresos</p>
                   </a>
                 </li>
                 

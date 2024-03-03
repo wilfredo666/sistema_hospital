@@ -75,6 +75,9 @@
                       <li>
                         <a href="FHisClinica?<?php echo $value['id_paciente']; ?>" class="dropdown-item">H. Clínica</a>
                       </li>
+                      <li>
+                        <a href="NotasEvoOrd?<?php echo $value['id_paciente']; ?>" class="dropdown-item">Evolucion y Ordenes</a>
+                      </li>
                     </ul>
 
                   </div>

@@ -105,6 +105,57 @@ class ModeloPaciente{
   }
 
   /*=======================
+traspaso paciente
+========================*/
+  static public function mdlInfoTraspasos(){
+    $stmt=Conexion::conectar()->prepare("select id_traspaso, num_historia_clinica, num_sus, nombre_paciente, ap_pat_paciente, ap_mat_paciente, fecha_ingreso, fecha_egreso, hora_ingreso, hora_egreso from traspaso JOIN paciente ON paciente.id_paciente=traspaso.id_paciente");
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlRegTraspaso($data){
+    $idPaciente = $data["idPaciente"];
+    $fIngreso = $data["fIngreso"];
+    $fEgreso = $data["fEgreso"];
+    $hIngreso = $data["hIngreso"];
+    $hEgreso = $data["hEgreso"];
+    $servicio = $data["servicio"];
+    $sala = $data["sala"];
+    $cama = $data["cama"];
+    $operaciones = $data["operaciones"];
+    $diagnostico = $data["diagnostico"];
+    $otroDiagnostico = $data["otroDiagnostico"];
+    $causasExternas = $data["causasExternas"];
+    $numDiasEstadia = $data["numDiasEstadia"];
+    $condEgreso = $data["condEgreso"];
+    $causaAlta = $data["causaAlta"];
+    $recienNacido = $data["recienNacido"];
+    $tipoNacido = $data["tipoNacido"];
+    $sexoNacido = $data["sexoNacido"];
+    $condNacer = $data["condNacer"];
+    $pesoNacido = $data["pesoNacido"];
+    $nomMedico = $data["nomMedico"];
+    $matrMedico = $data["matrMedico"];
+
+    $stmt=Conexion::conectar()->prepare(" INSERT INTO traspaso (id_paciente, fecha_ingreso, fecha_egreso, hora_ingreso, hora_egreso, servicio, sala, cama, operaciones, diagnostico, otroDiagnostico, causasExternas, numDiasEstadia, condEgreso, causaAlta, recienNacido, tipoNacido, sexoNacido, condNacer, pesoNacido, nomMedico, matrMedico) 
+VALUES ('$idPaciente', '$fIngreso', '$fEgreso', '$hIngreso', '$hEgreso', '$servicio', '$sala', '$cama', '$operaciones', '$diagnostico', '$otroDiagnostico', '$causasExternas', '$numDiasEstadia', '$condEgreso', '$causaAlta', '$recienNacido', '$tipoNacido', '$sexoNacido', '$condNacer', '$pesoNacido', '$nomMedico', '$matrMedico')");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+
+  }
+
+  /*=======================
 historia clinica en sala
 ========================*/
   static public function mdlRegHisClinica($data){
@@ -143,7 +194,28 @@ historia clinica en sala
   }
 
   static public function mdlEditHisClinica($data){
-    "SET 
+
+    $idHistoria = $data["idHistoria"];
+    $fuente_historia = $data["fuente_historia"];
+    $motivo_consulta = $data["motivo_consulta"];
+    $anamnesis = $data["anamnesis"];
+    $antecedentes = $data["antecedentes"];
+    $revision_sistemas = $data["revision_sistemas"];
+    $fecha = $data["fecha"];
+    $hora = $data["hora"];
+    $p_actual = $data["p_actual"];
+    $talla = $data["talla"];
+    $auxiliar = $data["auxiliar"];
+    $bucal = $data["bucal"];
+    $rectal = $data["rectal"];
+    $pulso = $data["pulso"];
+    $frec_respiratoria = $data["frec_respiratoria"];
+    $presion_max = $data["presion_max"];
+    $presion_min = $data["presion_min"];
+    $examen_general = $data["examen_general"];
+    $examen_regional = $data["examen_regional"];
+
+    $stmt=Conexion::conectar()->prepare("UPDATE historia SET 
     fuente_historia = '$fuente_historia',
     motivo_consulta = '$motivo_consulta',
     anamnesis = '$anamnesis',
@@ -162,14 +234,46 @@ historia clinica en sala
     presion_min = $presion_min,
     exm_fis_general = '$examen_general',
     exm_fis_regional = '$examen_regional'
-WHERE id_historia = $id_historia";
+WHERE id_historia = $idHistoria");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+  }
+
+  static public function mdlEliHistoria($id){
+    $stmt=Conexion::conectar()->prepare("delete from historia where id_historia=$id");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
   }
 
   static public function mdlInfoHistorias(){
-    $stmt=Conexion::conectar()->prepare("select id_historia, num_historia_clinica, nombre_paciente, ap_pat_paciente, ap_mat_paciente, fecha_nacimiento, fecha_historia, hora_historia from historia JOIN paciente ON paciente.id_paciente=historia.id_paciente");
+    $stmt=Conexion::conectar()->prepare("select id_historia, num_historia_clinica, num_sus, nombre_paciente, ap_pat_paciente, ap_mat_paciente, fecha_nacimiento, fecha_historia, hora_historia from historia JOIN paciente ON paciente.id_paciente=historia.id_paciente");
     $stmt->execute();
 
     return $stmt->fetchAll();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlInfoHistoria($id){
+    $stmt=Conexion::conectar()->prepare("select * from historia where id_historia=$id");
+    $stmt->execute();
+
+    return $stmt->fetch();
 
     $stmt->close();
     $stmt->null;

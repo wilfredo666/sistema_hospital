@@ -164,6 +164,48 @@ function MEliPaciente(id){
   })
 }
 
+/*========================
+traspaso paciente
+========================*/
+function regTraspaso(){
+    var formData=new FormData($("#FRegTraspaso")[0])
+
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrRegTraspaso",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+
+      if(data="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'El Ingreso/Traspaso/Egreso ha sido registrado',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+    }
+
+  })
+}
+
 /*=======================
 historia clinica en sala
 ========================*/
@@ -206,6 +248,82 @@ function regHisClinica(){
   })
 }
 
-function MEliHistoria(id){
+function editHisClinica(){
+  var formData=new FormData($("#FEditHisClinica")[0])
 
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrEditHisClinica",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+
+      if(data="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'Historia actualizada',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+    }
+
+  })
+}
+
+function MEliHistoria(id){
+  var obj={
+    id:id
+  }
+
+  Swal.fire({
+    title:"Estas seguro de eliminar esta historia?",
+    showDenyButton:true,
+    showCancelButton:false,
+    confirmButtonText:'Confirmar',
+    denyButtonText:'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      $.ajax({
+        type:"POST",
+        url:"controlador/pacienteControlador.php?ctrEliHistoria",
+        data:obj,
+        success:function(data){
+
+          if(data=="ok"){
+            location.reload()
+          }else{
+            Swal.fire({
+              icon: 'error',
+              showConfirmButton: false,
+              title: 'Error',
+              text:'La historia no puede ser eliminado',
+              timer: 1000
+            })
+          }
+        }
+      })
+    }
+  })
+}
+
+
+function FRegNotaEvoOrd(){
+  
 }
