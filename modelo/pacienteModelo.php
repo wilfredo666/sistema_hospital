@@ -279,4 +279,33 @@ WHERE id_historia = $idHistoria");
     $stmt->null;
   }
 
+  static public function mdlRegNotaEvoOrd($data){
+
+    $idPaciente = $data["idPaciente"];
+    $fechaEvolucion = $data["fechaEvolucion"];
+    $notaEvoClinica = $data["notaEvoClinica"];
+    $ordenMedica = $data["ordenMedica"];
+
+    $stmt=Conexion::conectar()->prepare(" INSERT INTO evolucion_orden (id_paciente, fecha_hora_evolucion, nota_evolucion, orden_medica) VALUES ($idPaciente, '$fechaEvolucion', '$notaEvoClinica', '$ordenMedica')");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+
+  }
+
+  static public function mdlInfoNotasEvoOrd(){
+    $stmt=Conexion::conectar()->prepare("select * from evolucion_orden");
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+
+    $stmt->close();
+    $stmt->null;
+  }
 }

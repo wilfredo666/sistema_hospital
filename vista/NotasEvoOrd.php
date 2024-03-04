@@ -65,7 +65,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-5">
                 <div class="form-group">
                   <label for="">Ordenes médicas</label>
-                  <textarea name="notaEvoClinica" id="notaEvoClinica" class="form-control"></textarea>
+                  <textarea name="ordenMedica" id="ordenMedica" class="form-control"></textarea>
                 </div>
               </div>
             </fieldset>
@@ -80,16 +80,41 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-12">
                 <table class="table table-bordered table-striped">
                   <thead>
-                    <th>Fecha y hora</th>
-                    <th>Notas de evolucion clínica</th>
-                    <th>Ordenes médicas</th>
-                    <td></td>
+                    <tr>
+                      <th>Fecha y hora</th>
+                      <th>Notas de evolucion clínica</th>
+                      <th>Ordenes médicas</th>
+                      <td></td>
+                    </tr>
+
                   </thead>
                   <tbody>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <?php
+                    $notas=ControladorPaciente::ctrInfoNotasEvoOrd();
+                    foreach($notas as $value){
+                    ?>
+                    <tr>
+                      <td><?php echo $value["fecha_hora_evolucion"];?></td>
+                      <td><?php echo $value["nota_evolucion"];?></td>
+                      <td><?php echo $value["orden_medica"];?></td>
+                      <td>
+                        <div class="btn-group">
+
+                          <button class="btn btn-secondary" onclick="MEditNota(<?php echo $value["id_evolucion_orden"];?>)">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button class="btn btn-danger" onclick="MEliNota(<?php echo $value["id_evolucion_orden"];?>)">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+
+                    </tr>
+                    <?php
+                    }
+                    ?>
+
+
                   </tbody>
                 </table>
               </div>

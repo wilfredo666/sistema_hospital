@@ -300,6 +300,42 @@ seccion de modals
   });
 </script>
 
+<!--validacion para notas de evolucion y orden medica-->
+<script>
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        regNotaEvoOrd()
+      }
+    });
+
+    $('#FRegNotaEvoOrd').validate({
+      rules: {
+        fechaEvolucion: {
+          required: true,
+        },
+        notaEvoClinica: {
+          required: true,
+        },
+        ordenMedica: {
+          required: true,
+        }
+      },
+
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+</script>
 
 </body>
 </html>

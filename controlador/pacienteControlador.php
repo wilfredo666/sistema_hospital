@@ -8,6 +8,7 @@ if(isset($ruta["query"])){
      $ruta["query"]=="ctrRegHisClinica"||
      $ruta["query"]=="ctrEditHisClinica"||
      $ruta["query"]=="ctrEliHistoria"||
+     $ruta["query"]=="ctrRegNotaEvoOrd"||
      $ruta["query"]=="ctrEliPaciente"){
     $metodo=$ruta["query"];
     $Paciente=new ControladorPaciente();
@@ -235,5 +236,26 @@ historia clinica en sala
     $edad = ($ahora-$tiempo)/(60*60*24*365.25); 
     $edad = floor($edad); 
     return $edad; 
-  } 
+  }
+
+  static public function ctrRegNotaEvoOrd(){
+    require "../modelo/pacienteModelo.php";
+
+    $data = array(
+      "idPaciente" => $_POST["idPaciente"],
+      "fechaEvolucion" => $_POST["fechaEvolucion"],
+      "notaEvoClinica" => $_POST["notaEvoClinica"],
+      "ordenMedica" => $_POST["ordenMedica"]
+    );
+
+    $respuesta=ModeloPaciente::mdlRegNotaEvoOrd($data);
+
+    echo $respuesta;
+  }
+
+  static public function ctrInfoNotasEvoOrd(){
+    $respuesta=ModeloPaciente::mdlInfoNotasEvoOrd();
+    return $respuesta;
+  }
+
 }

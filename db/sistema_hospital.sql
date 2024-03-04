@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2024 at 04:22 AM
+-- Generation Time: Mar 04, 2024 at 01:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,58 @@ SET time_zone = "+00:00";
 --
 -- Database: `sistema_hospital`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `evolucion_orden`
+--
+
+CREATE TABLE `evolucion_orden` (
+  `id_evolucion_orden` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `fecha_hora_evolucion` datetime NOT NULL,
+  `nota_evolucion` text NOT NULL,
+  `orden_medica` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `evolucion_orden`
+--
+
+INSERT INTO `evolucion_orden` (`id_evolucion_orden`, `id_paciente`, `fecha_hora_evolucion`, `nota_evolucion`, `orden_medica`) VALUES
+(2, 1, '2024-03-04 08:17:00', 'asd', 'qwe'),
+(3, 1, '2024-03-05 10:20:00', 'zxc', 'asd'),
+(4, 1, '2024-03-05 08:47:00', 'aumento de temperatura', 'administracion de diclofenaco');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `historia`
+--
+
+CREATE TABLE `historia` (
+  `id_historia` int(11) NOT NULL,
+  `id_paciente` int(11) DEFAULT NULL,
+  `fuente_historia` varchar(255) DEFAULT NULL,
+  `motivo_consulta` text DEFAULT NULL,
+  `anamnesis` text DEFAULT NULL,
+  `antecedentes` text DEFAULT NULL,
+  `revision_sistema` text DEFAULT NULL,
+  `fecha_historia` date DEFAULT NULL,
+  `hora_historia` time DEFAULT NULL,
+  `precion_actual` varchar(50) DEFAULT NULL,
+  `talla` decimal(5,2) DEFAULT NULL,
+  `tmp_auxiliar` varchar(30) DEFAULT NULL,
+  `tmp_bucal` varchar(30) DEFAULT NULL,
+  `tmp_rectal` varchar(30) DEFAULT NULL,
+  `pulso` int(11) DEFAULT NULL,
+  `frec_respiratoria` int(11) DEFAULT NULL,
+  `presion_max` int(11) DEFAULT NULL,
+  `presion_min` int(11) DEFAULT NULL,
+  `exm_fis_general` text DEFAULT NULL,
+  `exm_fis_regional` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -62,6 +114,45 @@ INSERT INTO `paciente` (`id_paciente`, `nombre_paciente`, `ap_pat_paciente`, `ap
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `traspaso`
+--
+
+CREATE TABLE `traspaso` (
+  `id_traspaso` int(11) NOT NULL,
+  `id_paciente` int(11) DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  `fecha_egreso` date DEFAULT NULL,
+  `hora_ingreso` time DEFAULT NULL,
+  `hora_egreso` time DEFAULT NULL,
+  `servicio` varchar(255) DEFAULT NULL,
+  `sala` varchar(50) DEFAULT NULL,
+  `cama` varchar(50) DEFAULT NULL,
+  `operaciones` text DEFAULT NULL,
+  `diagnostico` text DEFAULT NULL,
+  `otroDiagnostico` text DEFAULT NULL,
+  `causasExternas` text DEFAULT NULL,
+  `numDiasEstadia` int(11) DEFAULT NULL,
+  `condEgreso` varchar(50) DEFAULT NULL,
+  `causaAlta` varchar(50) DEFAULT NULL,
+  `recienNacido` varchar(50) DEFAULT NULL,
+  `tipoNacido` varchar(50) DEFAULT NULL,
+  `sexoNacido` varchar(50) DEFAULT NULL,
+  `condNacer` varchar(50) DEFAULT NULL,
+  `pesoNacido` decimal(10,2) DEFAULT NULL,
+  `nomMedico` varchar(100) DEFAULT NULL,
+  `matrMedico` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `traspaso`
+--
+
+INSERT INTO `traspaso` (`id_traspaso`, `id_paciente`, `fecha_ingreso`, `fecha_egreso`, `hora_ingreso`, `hora_egreso`, `servicio`, `sala`, `cama`, `operaciones`, `diagnostico`, `otroDiagnostico`, `causasExternas`, `numDiasEstadia`, `condEgreso`, `causaAlta`, `recienNacido`, `tipoNacido`, `sexoNacido`, `condNacer`, `pesoNacido`, `nomMedico`, `matrMedico`) VALUES
+(1, 1, '2024-03-03', '2024-03-05', '16:51:00', '20:51:00', 'xx', '1', '2', 'a', '', 'f', 'g', 2, 'vivo', 'Recuperacion', '', 'gemelos', 'masculino', 'vivo', 0.00, 'Luciana', 'l01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -86,10 +177,28 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `perfil`, `login_usuario`
 --
 
 --
+-- Indexes for table `evolucion_orden`
+--
+ALTER TABLE `evolucion_orden`
+  ADD PRIMARY KEY (`id_evolucion_orden`);
+
+--
+-- Indexes for table `historia`
+--
+ALTER TABLE `historia`
+  ADD PRIMARY KEY (`id_historia`);
+
+--
 -- Indexes for table `paciente`
 --
 ALTER TABLE `paciente`
   ADD PRIMARY KEY (`id_paciente`);
+
+--
+-- Indexes for table `traspaso`
+--
+ALTER TABLE `traspaso`
+  ADD PRIMARY KEY (`id_traspaso`);
 
 --
 -- Indexes for table `usuario`
@@ -102,10 +211,28 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT for table `evolucion_orden`
+--
+ALTER TABLE `evolucion_orden`
+  MODIFY `id_evolucion_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `historia`
+--
+ALTER TABLE `historia`
+  MODIFY `id_historia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
   MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `traspaso`
+--
+ALTER TABLE `traspaso`
+  MODIFY `id_traspaso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usuario`

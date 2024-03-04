@@ -324,6 +324,40 @@ function MEliHistoria(id){
 }
 
 
-function FRegNotaEvoOrd(){
-  
+function regNotaEvoOrd(){
+  var formData=new FormData($("#FRegNotaEvoOrd")[0])
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrRegNotaEvoOrd",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+
+      if(data="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'Registrado agregado',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+    }
+
+  })
 }
