@@ -101,13 +101,6 @@ with font-awesome or any other icon font library -->
                   </a>
                 </li>
                 
-                <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Evolucion y orden medica</p>
-                  </a>
-                </li>
-                
               </ul>
             </li>
 

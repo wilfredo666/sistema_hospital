@@ -29,7 +29,7 @@ function regPaciente(){
     processData:false,
     success:function(data){
 
-      if(data="ok"){
+      if(data=="ok"){
 
         Swal.fire({
           icon: 'success',
@@ -101,7 +101,7 @@ function editPaciente(){
     success:function(data){
 
 
-      if(data="ok"){
+      if(data=="ok"){
 
         Swal.fire({
           icon: 'success',
@@ -168,7 +168,7 @@ function MEliPaciente(id){
 traspaso paciente
 ========================*/
 function regTraspaso(){
-    var formData=new FormData($("#FRegTraspaso")[0])
+  var formData=new FormData($("#FRegTraspaso")[0])
 
 
   $.ajax({
@@ -180,7 +180,7 @@ function regTraspaso(){
     processData:false,
     success:function(data){
 
-      if(data="ok"){
+      if(data=="ok"){
 
         Swal.fire({
           icon: 'success',
@@ -206,11 +206,87 @@ function regTraspaso(){
   })
 }
 
+function editTraspaso(){
+  
+  var formData=new FormData($("#FEditTraspaso")[0])
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrEditTraspaso",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+
+      if(data=="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'Traslado actualizado',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+    }
+
+  })
+
+}
+
+function MEliTraspaso(id){
+  var obj={
+    id:id
+  }
+
+  Swal.fire({
+    title:"Estas seguro de eliminar este registro?",
+    showDenyButton:true,
+    showCancelButton:false,
+    confirmButtonText:'Confirmar',
+    denyButtonText:'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      $.ajax({
+        type:"POST",
+        url:"controlador/pacienteControlador.php?ctrEliTraspaso",
+        data:obj,
+        success:function(data){
+
+          if(data=="ok"){
+            location.reload()
+          }else{
+            Swal.fire({
+              icon: 'error',
+              showConfirmButton: false,
+              title: 'Error',
+              text:'Registro eliminado',
+              timer: 1000
+            })
+          }
+        }
+      })
+    }
+  })
+}
+
 /*=======================
 historia clinica en sala
 ========================*/
 function regHisClinica(){
-    var formData=new FormData($("#FRegHisClinica")[0])
+  var formData=new FormData($("#FRegHisClinica")[0])
 
 
   $.ajax({
@@ -222,7 +298,7 @@ function regHisClinica(){
     processData:false,
     success:function(data){
 
-      if(data="ok"){
+      if(data=="ok"){
 
         Swal.fire({
           icon: 'success',
@@ -261,7 +337,7 @@ function editHisClinica(){
     processData:false,
     success:function(data){
 
-      if(data="ok"){
+      if(data=="ok"){
 
         Swal.fire({
           icon: 'success',
@@ -323,7 +399,9 @@ function MEliHistoria(id){
   })
 }
 
-
+/*================
+ordenes medicas
+=================*/
 function regNotaEvoOrd(){
   var formData=new FormData($("#FRegNotaEvoOrd")[0])
 
@@ -336,7 +414,7 @@ function regNotaEvoOrd(){
     processData:false,
     success:function(data){
 
-      if(data="ok"){
+      if(data=="ok"){
 
         Swal.fire({
           icon: 'success',
@@ -359,5 +437,95 @@ function regNotaEvoOrd(){
 
     }
 
+  })
+}
+
+function MEditNota(id){
+  $("#modal-default").modal("show")
+
+  var obj=""
+  $.ajax({
+    type:"POST",
+    url:"vista/paciente/FEditNota.php?id="+id,
+    data:obj,
+    success:function(data){
+      $("#content-default").html(data)
+    }
+
+  })
+}
+
+function editNota(){
+  var formData=new FormData($("#FEditNota")[0])
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrEditNota",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+
+      if(data=="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'Nota/Orden actualizada',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+    }
+
+  })
+
+}
+
+function MEliNota(id){
+  var obj={
+    id:id
+  }
+
+  Swal.fire({
+    title:"Estas seguro de eliminar esta Nota/Orden?",
+    showDenyButton:true,
+    showCancelButton:false,
+    confirmButtonText:'Confirmar',
+    denyButtonText:'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      $.ajax({
+        type:"POST",
+        url:"controlador/pacienteControlador.php?ctrEliNotaOrden",
+        data:obj,
+        success:function(data){
+
+          if(data=="ok"){
+            location.reload()
+          }else{
+            Swal.fire({
+              icon: 'error',
+              showConfirmButton: false,
+              title: 'Error',
+              text:'La orden no puede ser eliminada',
+              timer: 1000
+            })
+          }
+        }
+      })
+    }
   })
 }

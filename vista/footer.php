@@ -154,6 +154,71 @@ seccion de modals
   });
 </script>
 
+<!--validacion para traspaso/ingreso-->
+<script>
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        editTraspaso()
+      }
+    });
+
+    $('#FEditTraspaso').validate({
+      rules: {
+        fIngreso: {
+          required: true
+        },
+        hIngreso: {
+          required: true
+        },
+        servicio: {
+          required: true
+        },
+        sala: {
+          required: true
+        },
+        cama: {
+          required: true
+        },
+        operaciones: {
+          required: true
+        },
+        diagnostigo: {
+          required: true
+        },
+        otroDiagnostico: {
+          required: true
+        },
+        causasExternas: {
+          required: true
+        },
+        numDiasEstadia: {
+          required: true
+        },
+        nomMedico: {
+          required: true
+        },
+        matrMedico: {
+          required: true
+        }
+      },
+
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+</script>
+
+
 <!--validacion para historia clinica en sala-->
 <script>
   $(function () {

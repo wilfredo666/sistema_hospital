@@ -100,12 +100,12 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
                       <td>
                         <div class="btn-group">
 
-                          <button class="btn btn-secondary" onclick="MEditNota(<?php echo $value["id_evolucion_orden"];?>)">
+                          <a class="btn btn-secondary" onclick="MEditNota(<?php echo $value["id_evolucion_orden"];?>)">
                             <i class="fas fa-edit"></i>
-                          </button>
-                          <button class="btn btn-danger" onclick="MEliNota(<?php echo $value["id_evolucion_orden"];?>)">
+                          </a>
+                          <a class="btn btn-danger" onclick="MEliNota(<?php echo $value["id_evolucion_orden"];?>)">
                             <i class="fas fa-trash"></i>
-                          </button>
+                          </a>
                         </div>
                       </td>
 

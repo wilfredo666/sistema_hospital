@@ -5,10 +5,15 @@ if(isset($ruta["query"])){
   if($ruta["query"]=="ctrRegPaciente"||
      $ruta["query"]=="ctrEditPaciente"||
      $ruta["query"]=="ctrRegTraspaso"||
+     $ruta["query"]=="ctrEditTraspaso"||
+     $ruta["query"]=="ctrEliTraspaso"||
      $ruta["query"]=="ctrRegHisClinica"||
      $ruta["query"]=="ctrEditHisClinica"||
      $ruta["query"]=="ctrEliHistoria"||
      $ruta["query"]=="ctrRegNotaEvoOrd"||
+     $ruta["query"]=="ctrInfoNotaEvoOrd"||
+     $ruta["query"]=="ctrEditNota"||
+     $ruta["query"]=="ctrEliNotaOrden"||
      $ruta["query"]=="ctrEliPaciente"){
     $metodo=$ruta["query"];
     $Paciente=new ControladorPaciente();
@@ -120,6 +125,12 @@ traspaso paciente
     $respuesta=ModeloPaciente::mdlInfoTraspasos();
     return $respuesta;
   }
+
+  static function ctrInfoTraspaso($id){
+    $respuesta=ModeloPaciente::mdlInfoTraspaso($id);
+    return $respuesta;
+  }
+
   static function ctrRegTraspaso(){
     require "../modelo/pacienteModelo.php";
     $datos_traspaso = array(
@@ -132,7 +143,7 @@ traspaso paciente
       "sala" => $_POST["sala"],
       "cama" => $_POST["cama"],
       "operaciones" => $_POST["operaciones"],
-      "diagnostigo" => $_POST["diagnostigo"],
+      "diagnostico" => $_POST["diagnostico"],
       "otroDiagnostico" => $_POST["otroDiagnostico"],
       "causasExternas" => $_POST["causasExternas"],
       "numDiasEstadia" => $_POST["numDiasEstadia"],
@@ -148,7 +159,47 @@ traspaso paciente
     );
 
     $respuesta=ModeloPaciente::mdlRegTraspaso($datos_traspaso);
-    return $respuesta;
+    echo $respuesta;
+  }
+  
+  static function ctrEditTraspaso(){
+    
+    require "../modelo/pacienteModelo.php";
+    $datos_traspaso = array(
+      "idTraspaso" => $_POST["idTraspaso"],
+      "fIngreso" => $_POST["fIngreso"],
+      "fEgreso" => $_POST["fEgreso"],
+      "hIngreso" => $_POST["hIngreso"],
+      "hEgreso" => $_POST["hEgreso"],
+      "servicio" => $_POST["servicio"],
+      "sala" => $_POST["sala"],
+      "cama" => $_POST["cama"],
+      "operaciones" => $_POST["operaciones"],
+      "diagnostico" => $_POST["diagnostico"],
+      "otroDiagnostico" => $_POST["otroDiagnostico"],
+      "causasExternas" => $_POST["causasExternas"],
+      "numDiasEstadia" => $_POST["numDiasEstadia"],
+      "condEgreso" => $_POST["condEgreso"],
+      "causaAlta" => $_POST["causaAlta"],
+      "recienNacido" => $_POST["recienNacido"],
+      "tipoNacido" => $_POST["tipoNacido"],
+      "sexoNacido" => $_POST["sexoNacido"],
+      "condNacer" => $_POST["condNacer"],
+      "pesoNacido" => $_POST["pesoNacido"],
+      "nomMedico" => $_POST["nomMedico"],
+      "matrMedico" => $_POST["matrMedico"]
+    );
+
+    $respuesta=ModeloPaciente::mdlEditTraspaso($datos_traspaso);
+    echo $respuesta;
+  }
+
+  static function ctrEliTraspaso(){
+    require "../modelo/pacienteModelo.php";
+    $id=$_POST["id"];
+
+    $respuesta=ModeloPaciente::mdlEliTraspaso($id);
+    echo $respuesta;
   }
 
   /*=======================
@@ -258,4 +309,30 @@ historia clinica en sala
     return $respuesta;
   }
 
+  static public function ctrInfoNotaEvoOrd($id){
+    $respuesta=ModeloPaciente::mdlInfoNotaEvoOrd($id);
+    return $respuesta;
+  }
+
+  static public function ctrEditNota(){
+    require "../modelo/pacienteModelo.php";
+
+    $data = array(
+      "idNota" => $_POST["idNota"],
+      "notaEvoClinica" => $_POST["notaEvoClinica"],
+      "ordenMedica" => $_POST["ordenMedica"]
+    );
+
+    $respuesta=ModeloPaciente::mdlEditNota($data);
+
+    echo $respuesta;
+  }
+
+  static public function ctrEliNotaOrden(){
+    require "../modelo/pacienteModelo.php";
+    $id=$_POST["id"];
+
+    $respuesta=ModeloPaciente::mdlEliNotaOrden($id);
+    echo $respuesta;
+  }
 }

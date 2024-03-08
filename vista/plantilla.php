@@ -31,6 +31,7 @@ session_start();
          $_GET["ruta"]=="VPaciente"||
          $_GET["ruta"]=="VTraspaso"||
          $_GET["ruta"]=="FTraspaso"||
+         $_GET["ruta"]=="FEditTraspaso"||
          $_GET["ruta"]=="VHistoria"||
          $_GET["ruta"]=="FHisClinica"||
          $_GET["ruta"]=="FEditHistoria"||

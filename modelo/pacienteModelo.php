@@ -117,6 +117,16 @@ traspaso paciente
     $stmt->null;
   }
 
+  static public function mdlInfoTraspaso($id){
+    $stmt=Conexion::conectar()->prepare("select * from traspaso where id_traspaso=$id");
+    $stmt->execute();
+
+    return $stmt->fetch();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
   static public function mdlRegTraspaso($data){
     $idPaciente = $data["idPaciente"];
     $fIngreso = $data["fIngreso"];
@@ -153,6 +163,80 @@ VALUES ('$idPaciente', '$fIngreso', '$fEgreso', '$hIngreso', '$hEgreso', '$servi
     $stmt->close();
     $stmt->null();
 
+  }
+
+  static public function mdlEditTraspaso($data){
+    $idTraspaso = $data["idTraspaso"];
+    $fIngreso = $data["fIngreso"];
+    $fEgreso = $data["fEgreso"];
+    $hIngreso = $data["hIngreso"];
+    $hEgreso = $data["hEgreso"];
+    $servicio = $data["servicio"];
+    $sala = $data["sala"];
+    $cama = $data["cama"];
+    $operaciones = $data["operaciones"];
+    $diagnostico = $data["diagnostico"];
+    $otroDiagnostico = $data["otroDiagnostico"];
+    $causasExternas = $data["causasExternas"];
+    $numDiasEstadia = $data["numDiasEstadia"];
+    $condEgreso = $data["condEgreso"];
+    $causaAlta = $data["causaAlta"];
+    $recienNacido = $data["recienNacido"];
+    $tipoNacido = $data["tipoNacido"];
+    $sexoNacido = $data["sexoNacido"];
+    $condNacer = $data["condNacer"];
+    $pesoNacido = $data["pesoNacido"];
+    $nomMedico = $data["nomMedico"];
+    $matrMedico = $data["matrMedico"];
+
+    $stmt=Conexion::conectar()->prepare("UPDATE traspaso
+SET 
+    fecha_ingreso = '$fIngreso',
+    fecha_egreso = '$fEgreso',
+    hora_ingreso = '$hIngreso',
+    hora_egreso = '$hEgreso',
+    servicio = '$servicio',
+    sala = '$sala',
+    cama = '$cama',
+    operaciones = '$operaciones',
+    diagnostico = '$diagnostico',
+    otroDiagnostico = '$otroDiagnostico',
+    causasExternas = '$causasExternas',
+    numDiasEstadia = '$numDiasEstadia',
+    condEgreso = '$condEgreso',
+    causaAlta = '$causaAlta',
+    recienNacido = '$recienNacido',
+    tipoNacido = '$tipoNacido',
+    sexoNacido = '$sexoNacido',
+    condNacer = '$condNacer',
+    pesoNacido = '$pesoNacido',
+    nomMedico = '$nomMedico',
+    matrMedico = '$matrMedico'
+WHERE
+    id_traspaso = '$idTraspaso';");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+
+  }
+
+  static public function mdlEliTraspaso($id){
+    $stmt=Conexion::conectar()->prepare("delete from traspaso where id_traspaso=$id");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
   }
 
   /*=======================
@@ -307,5 +391,45 @@ WHERE id_historia = $idHistoria");
 
     $stmt->close();
     $stmt->null;
+  }
+
+  static public function mdlInfoNotaEvoOrd($id){
+    $stmt=Conexion::conectar()->prepare("select * from evolucion_orden where id_evolucion_orden=$id");
+    $stmt->execute();
+
+    return $stmt->fetch();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlEditNota($data){
+    $idNota = $data["idNota"];
+    $notaEvoClinica = $data["notaEvoClinica"];
+    $ordenMedica = $data["ordenMedica"];
+
+    $stmt=Conexion::conectar()->prepare("UPDATE evolucion_orden SET nota_evolucion='$notaEvoClinica', orden_medica='$ordenMedica' WHERE id_evolucion_orden=$idNota");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+  }
+
+  static public function mdlEliNotaOrden($id){
+    $stmt=Conexion::conectar()->prepare("delete from evolucion_orden where id_evolucion_orden=$id");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
   }
 }
