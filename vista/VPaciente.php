@@ -78,6 +78,9 @@
                       <li>
                         <a href="NotasEvoOrd?<?php echo $value['id_paciente']; ?>" class="dropdown-item">Evolucion y Ordenes</a>
                       </li>
+                      <li>
+                        <a href="FEpicrisis?<?php echo $value['id_paciente']; ?>" class="dropdown-item">Epicrisis</a>
+                      </li>
                     </ul>
 
                   </div>

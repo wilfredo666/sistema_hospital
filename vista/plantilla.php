@@ -36,6 +36,7 @@ session_start();
          $_GET["ruta"]=="FHisClinica"||
          $_GET["ruta"]=="FEditHistoria"||
          $_GET["ruta"]=="NotasEvoOrd"||
+         $_GET["ruta"]=="FEpicrisis"||
          $_GET["ruta"]=="salir"||
          $_GET["ruta"]=="VUsuario"){
         include "asideMenu.php";

@@ -432,4 +432,70 @@ WHERE id_historia = $idHistoria");
     $stmt->close();
     $stmt->null();
   }
+
+  /*=======================
+epicrisis
+========================*/
+  static public function mdlRegEpicrisis($data){
+
+    $id_paciente = $data["id_paciente"];
+    $fecha_ingreso = $data["fecha_ingreso"];
+    $serv_egreso = $data["serv_egreso"];
+    $fecha_egreso = $data["fecha_egreso"];
+    $servicio_epicrisis = $data["servicio_epicrisis"];
+    $medico_ingreso = $data["medico_ingreso"];
+    $fecha_ingreso_epi = $data["fecha_ingreso_epi"];
+    $por_emergencia = $data["por_emergencia"];
+    $consulta_externa = $data["consulta_externa"];
+    $referido = $data["referido"];
+    $referido_de = $data["referido_de"];
+    $condicion_ingreso = $data["condicion_ingreso"];
+    $resumen_anamnesi = $data["resumen_anamnesi"];
+    $examen_fisico = $data["examen_fisico"];
+    $diagnostico_ingreso = $data["diagnostico_ingreso"];
+    $emograma = $data["emograma"];
+    $reaccion_widal = $data["reaccion_widal"];
+    $coproparasitolo = $data["coproparasitolo"];
+    $examen_orina = $data["examen_orina"];
+    $electrolito = $data["electrolito"];
+    $radiografia = $data["radiografia"];
+    $diagnostico_sala = $data["diagnostico_sala"];
+    $tratamiento_recibido = $data["tratamiento_recibido"];
+    $evaluacion_servicio = $data["evaluacion_servicio"];
+    $complicaciones = $data["complicaciones"];
+    $diagnostico_egreso = $data["diagnostico_egreso"];
+    $fecha_egreso_epi = $data["fecha_egreso_epi"];
+    $tratamiento_ambulatorio = $data["tratamiento_ambulatorio"];
+    $condicion_egreso = $data["condicion_egreso"];
+    $fecha_control = $data["fecha_control"];
+    $nombre_medico = $data["nombre_medico"];
+    $matricula_medico = $data["matricula_medico"];
+
+    $stmt=Conexion::conectar()->prepare("INSERT INTO epicrisis (
+        id_paciente, fecha_ingreso, serv_egreso, fecha_egreso, servicio_epicrisis, medico_ingreso, fecha_ingreso_epi, por_emergencia, 
+        consulta_externa, referido, referido_de, condicion_ingreso, resumen_anamnesi, examen_fisico, 
+        diagnostico_ingreso, emograma, reaccion_widal, coproparasitolo, examen_orina, electrolito, 
+        radiografia, diagnostico_sala, tratamiento_recibido, evaluacion_servicio, complicaciones, 
+        diagnostico_egreso, fecha_egreso_epi, tratamiento_ambulatorio, condicion_egreso, fecha_control, 
+        nombre_medico, matricula_medico
+    ) VALUES (
+        '$id_paciente', '$fecha_ingreso', '$serv_egreso', '$fecha_egreso', '$servicio_epicrisis', '$medico_ingreso', '$fecha_ingreso_epi', 
+        '$por_emergencia', '$consulta_externa', '$referido', '$referido_de', '$condicion_ingreso', 
+        '$resumen_anamnesi', '$examen_fisico', '$diagnostico_ingreso', '$emograma', '$reaccion_widal', 
+        '$coproparasitolo', '$examen_orina', '$electrolito', '$radiografia', '$diagnostico_sala', 
+        '$tratamiento_recibido', '$evaluacion_servicio', '$complicaciones', '$diagnostico_egreso', 
+        '$fecha_egreso_epi', '$tratamiento_ambulatorio', '$condicion_egreso', '$fecha_control', 
+        '$nombre_medico', '$matricula_medico'
+    )");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+
+  }
 }

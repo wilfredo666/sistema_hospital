@@ -529,3 +529,45 @@ function MEliNota(id){
     }
   })
 }
+
+/*================
+epicrisis
+=================*/
+function regEpicrisis(){
+    var formData=new FormData($("#FRegEpicrisis")[0])
+
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrRegEpicrisis",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+console.log(data)
+      /*if(data=="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'Registro de Epicrisis',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }*/
+
+    }
+
+  })
+}
