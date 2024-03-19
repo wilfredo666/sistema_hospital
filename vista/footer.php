@@ -487,6 +487,90 @@ seccion de modals
   });
 </script>
 
+<!--validacion para actualizar epicrisis-->
+<script>
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        editEpicrisis()
+      }
+    });
+
+    $('#FEditEpicrisis').validate({
+       rules: {
+
+        fecha_ingreso: {
+          required: true
+        },
+        servicio_epicrisis: {
+          required: true,
+          maxlength: 200
+        },
+        medico_ingreso: {
+          required: true,
+          maxlength: 100
+        },
+        fecha_ingreso_epi: {
+          required: true
+        },
+        diagnostico_ingreso: {
+          required: true
+        },
+        diagnostico_sala: {
+          required: true
+        },
+        tratamiento_recibido: {
+          required: true
+        },
+        evaluacion_servicio: {
+          required: true,
+          maxlength: 250
+        },
+        complicaciones: {
+          required: true,
+          maxlength: 250
+        },
+        diagnostico_egreso: {
+          required: true,
+          maxlength: 200
+        },
+         fecha_egreso_epi: {
+          required: true
+        },
+        tratamiento_ambulatorio: {
+          required: true
+        },
+        condicion_egreso: {
+          required: true,
+          maxlength: 250
+        },
+        fecha_control: {
+          required: true
+        },
+        nombre_medico: {
+          required: true,
+          maxlength: 100
+        },
+        matricula_medico: {
+          required: true,
+          maxlength: 50
+        }
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>

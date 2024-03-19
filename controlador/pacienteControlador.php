@@ -15,6 +15,7 @@ if(isset($ruta["query"])){
      $ruta["query"]=="ctrEditNota"||
      $ruta["query"]=="ctrEliNotaOrden"||
      $ruta["query"]=="ctrRegEpicrisis"||
+     $ruta["query"]=="ctrEditEpicrisis"||
      $ruta["query"]=="ctrEliPaciente"){
     $metodo=$ruta["query"];
     $Paciente=new ControladorPaciente();
@@ -341,7 +342,7 @@ historia clinica en sala
 epicrisis
 ========================*/
 
-  static function ctrRegEpicrisis(){
+  static public function ctrRegEpicrisis(){
     require "../modelo/pacienteModelo.php";
     
     $data_epicrisis = array(
@@ -380,6 +381,59 @@ epicrisis
     );
 
     $respuesta=ModeloPaciente::mdlRegEpicrisis($data_epicrisis);
+
+    echo $respuesta;
+  }
+  
+  static public function ctrInfoEpicrisis(){
+    $respuesta=ModeloPaciente::mdlInfoEpicrisis();
+    return $respuesta;
+  }
+  
+  static public function ctrInfoEpicrisi($idEpicrisis){
+    $respuesta=ModeloPaciente::mdlInfoEpicrisi($idEpicrisis);
+    return $respuesta;
+  }
+  
+   static public function ctrEditEpicrisis(){
+    require "../modelo/pacienteModelo.php";
+    
+    $data_epicrisis = array(
+      "id_epicrisis" => $_POST["id_epicrisis"],
+      "fecha_ingreso" => $_POST["fecha_ingreso"],
+      "serv_egreso" => $_POST["serv_egreso"],
+      "fecha_egreso" => $_POST["fecha_egreso"],
+      "servicio_epicrisis" => $_POST["servicio_epicrisis"],
+      "medico_ingreso" => $_POST["medico_ingreso"],
+      "fecha_ingreso_epi" => $_POST["fecha_ingreso_epi"],
+      "por_emergencia" => $_POST["por_emergencia"],
+      "consulta_externa" => $_POST["consulta_externa"],
+      "referido" => isset($_POST["referido"]) ? 1 : 0,
+      "referido_de" => $_POST["referido_de"],
+      "condicion_ingreso" => $_POST["condicion_ingreso"],
+      "resumen_anamnesi" => $_POST["resumen_anamnesi"],
+      "examen_fisico" => $_POST["examen_fisico"],
+      "diagnostico_ingreso" => $_POST["diagnostico_ingreso"],
+      "emograma" => $_POST["emograma"],
+      "reaccion_widal" => $_POST["reaccion_widal"],
+      "coproparasitolo" => $_POST["coproparasitolo"],
+      "examen_orina" => $_POST["examen_orina"],
+      "electrolito" => $_POST["electrolito"],
+      "radiografia" => $_POST["radiografia"],
+      "diagnostico_sala" => $_POST["diagnostico_sala"],
+      "tratamiento_recibido" => $_POST["tratamiento_recibido"],
+      "evaluacion_servicio" => $_POST["evaluacion_servicio"],
+      "complicaciones" => $_POST["complicaciones"],
+      "diagnostico_egreso" => $_POST["diagnostico_egreso"],
+      "fecha_egreso_epi" => $_POST["fecha_egreso_epi"],
+      "tratamiento_ambulatorio" => $_POST["tratamiento_ambulatorio"],
+      "condicion_egreso" => $_POST["condicion_egreso"],
+      "fecha_control" => $_POST["fecha_control"],
+      "nombre_medico" => $_POST["nombre_medico"],
+      "matricula_medico" => $_POST["matricula_medico"]
+    );
+
+    $respuesta=ModeloPaciente::mdlEditEpicrisis($data_epicrisis);
 
     echo $respuesta;
   }

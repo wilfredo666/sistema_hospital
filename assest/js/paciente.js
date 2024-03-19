@@ -545,8 +545,8 @@ function regEpicrisis(){
     contentType:false,
     processData:false,
     success:function(data){
-console.log(data)
-      /*if(data=="ok"){
+
+      if(data=="ok"){
 
         Swal.fire({
           icon: 'success',
@@ -565,9 +565,49 @@ console.log(data)
           showConfirmButton: false,
           timer: 1000
         })
-      }*/
+      }
 
     }
 
   })
+}
+
+function editEpicrisis(){
+    
+  var formData=new FormData($("#FEditEpicrisis")[0])
+
+  $.ajax({
+    type:"POST",
+    url:"controlador/pacienteControlador.php?ctrEditEpicrisis",
+    data:formData,
+    cache:false,
+    contentType:false,
+    processData:false,
+    success:function(data){
+
+      if(data=="ok"){
+
+        Swal.fire({
+          icon: 'success',
+          showConfirmButton: false,
+          title: 'Epicrisis actualizada',
+          timer: 1000
+        })
+        setTimeout(function(){
+          location.reload()
+        },1200)
+
+      }else{
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+    }
+
+  })
+
 }

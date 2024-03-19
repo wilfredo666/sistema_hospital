@@ -498,4 +498,106 @@ epicrisis
     $stmt->null();
 
   }
+
+  static public function mdlInfoEpicrisis(){
+    $stmt=Conexion::conectar()->prepare("select id_epicrisis, num_historia_clinica, num_sus, nombre_paciente, ap_pat_paciente, ap_mat_paciente, fecha_ingreso_epi from epicrisis JOIN paciente ON paciente.id_paciente=epicrisis.id_paciente");
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlInfoEpicrisi($idEpicrisis){
+    $stmt=Conexion::conectar()->prepare("select * from epicrisis where id_epicrisis=$idEpicrisis");
+    $stmt->execute();
+
+    return $stmt->fetch();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlEditEpicrisis($data){
+
+    $id_epicrisis = $data["id_epicrisis"];
+    $fecha_ingreso = $data["fecha_ingreso"];
+    $serv_egreso = $data["serv_egreso"];
+    $fecha_egreso = $data["fecha_egreso"];
+    $servicio_epicrisis = $data["servicio_epicrisis"];
+    $medico_ingreso = $data["medico_ingreso"];
+    $fecha_ingreso_epi = $data["fecha_ingreso_epi"];
+    $por_emergencia = $data["por_emergencia"];
+    $consulta_externa = $data["consulta_externa"];
+    $referido = $data["referido"];
+    $referido_de = $data["referido_de"];
+    $condicion_ingreso = $data["condicion_ingreso"];
+    $resumen_anamnesi = $data["resumen_anamnesi"];
+    $examen_fisico = $data["examen_fisico"];
+    $diagnostico_ingreso = $data["diagnostico_ingreso"];
+    $emograma = $data["emograma"];
+    $reaccion_widal = $data["reaccion_widal"];
+    $coproparasitolo = $data["coproparasitolo"];
+    $examen_orina = $data["examen_orina"];
+    $electrolito = $data["electrolito"];
+    $radiografia = $data["radiografia"];
+    $diagnostico_sala = $data["diagnostico_sala"];
+    $tratamiento_recibido = $data["tratamiento_recibido"];
+    $evaluacion_servicio = $data["evaluacion_servicio"];
+    $complicaciones = $data["complicaciones"];
+    $diagnostico_egreso = $data["diagnostico_egreso"];
+    $fecha_egreso_epi = $data["fecha_egreso_epi"];
+    $tratamiento_ambulatorio = $data["tratamiento_ambulatorio"];
+    $condicion_egreso = $data["condicion_egreso"];
+    $fecha_control = $data["fecha_control"];
+    $nombre_medico = $data["nombre_medico"];
+    $matricula_medico = $data["matricula_medico"];
+
+    $stmt=Conexion::conectar()->prepare("UPDATE epicrisis 
+SET 
+    fecha_ingreso = '$fecha_ingreso',
+    serv_egreso = '$serv_egreso',
+    fecha_egreso = '$fecha_egreso',
+    servicio_epicrisis = '$servicio_epicrisis',
+    medico_ingreso = '$medico_ingreso',
+    fecha_ingreso_epi = '$fecha_ingreso_epi',
+    por_emergencia = '$por_emergencia',
+    consulta_externa = '$consulta_externa',
+    referido = '$referido',
+    referido_de = '$referido_de',
+    condicion_ingreso = '$condicion_ingreso',
+    resumen_anamnesi = '$resumen_anamnesi',
+    examen_fisico = '$examen_fisico',
+    diagnostico_ingreso = '$diagnostico_ingreso',
+    emograma = '$emograma',
+    reaccion_widal = '$reaccion_widal',
+    coproparasitolo = '$coproparasitolo',
+    examen_orina = '$examen_orina',
+    electrolito = '$electrolito',
+    radiografia = '$radiografia',
+    diagnostico_sala = '$diagnostico_sala',
+    tratamiento_recibido = '$tratamiento_recibido',
+    evaluacion_servicio = '$evaluacion_servicio',
+    complicaciones = '$complicaciones',
+    diagnostico_egreso = '$diagnostico_egreso',
+    fecha_egreso_epi = '$fecha_egreso_epi',
+    tratamiento_ambulatorio = '$tratamiento_ambulatorio',
+    condicion_egreso = '$condicion_egreso',
+    fecha_control = '$fecha_control',
+    nombre_medico = '$nombre_medico',
+    matricula_medico = '$matricula_medico'
+WHERE 
+    id_epicrisis = $id_epicrisis");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+
+  }
 }
