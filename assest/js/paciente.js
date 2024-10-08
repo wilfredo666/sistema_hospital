@@ -207,7 +207,7 @@ function regTraspaso(){
 }
 
 function editTraspaso(){
-  
+
   var formData=new FormData($("#FEditTraspaso")[0])
 
   $.ajax({
@@ -534,7 +534,7 @@ function MEliNota(id){
 epicrisis
 =================*/
 function regEpicrisis(){
-    var formData=new FormData($("#FRegEpicrisis")[0])
+  var formData=new FormData($("#FRegEpicrisis")[0])
 
 
   $.ajax({
@@ -573,7 +573,7 @@ function regEpicrisis(){
 }
 
 function editEpicrisis(){
-    
+
   var formData=new FormData($("#FEditEpicrisis")[0])
 
   $.ajax({
@@ -610,4 +610,58 @@ function editEpicrisis(){
 
   })
 
+}
+
+function FEliEpicrisis(id){
+  var obj={
+    id:id
+  }
+
+  Swal.fire({
+    title:"Estas seguro de eliminar este registro?",
+    showDenyButton:true,
+    showCancelButton:false,
+    confirmButtonText:'Confirmar',
+    denyButtonText:'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      $.ajax({
+        type:"POST",
+        url:"controlador/pacienteControlador.php?ctrEliEpicrisis",
+        data:obj,
+        success:function(data){
+
+          if(data=="ok"){
+            location.reload()
+          }else{
+            Swal.fire({
+              icon: 'error',
+              showConfirmButton: false,
+              title: 'Error',
+              text:'El registro no puede ser eliminado',
+              timer: 1000
+            })
+          }
+        }
+      })
+    }
+  })
+}
+
+function marcarRealizado(idev,vlrz,idenf){
+  var obj={
+    idEvolucion:idev,
+    valor:vlrz,
+    idenfermero:idenf  
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "controlador/pacienteControlador.php?ctrMarcarRealizado",
+    data: obj,
+    success: function(data) {
+
+    }
+
+  })
 }

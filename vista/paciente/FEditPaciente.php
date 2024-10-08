@@ -71,6 +71,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
           <input type="text" class="form-control" id="estCivil" name="estCivil" value="<?php echo $paciente["estado_civil"];?>">
         </div>
       </div>
+
     </div>
 
     <div class="row">
@@ -81,10 +82,19 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
           <input type="text" class="form-control" name="dirPaciente" id="dirPaciente" placeholder="Direccion del paciente u otra persona de referencia" value="<?php echo $paciente["direccion_paciente"];?>">
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <div class="form-group">
           <label for="">Procedencia</label>
           <input type="text" class="form-control" name="procPaciente" id="procPaciente" placeholder="Pueblo o municipio de dónde imigra el paciente" value="<?php echo $paciente["procedencia"];?>">
+        </div>
+      </div>
+            <div class="col-sm-3">
+        <div class="form-group">
+          <label for="">Estado Paciente</label>
+          <select name="estadoPaciente" id="estadoPaciente" class="form-control">
+            <option value="1" <?php if($paciente["estado_paciente"]==1):?>selected<?php endif;?>>De alta</option>
+            <option value="0" <?php if($paciente["estado_paciente"]==0):?>selected<?php endif;?>>De Baja</option>
+          </select>
         </div>
       </div>
     </div>

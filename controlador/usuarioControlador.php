@@ -1,4 +1,5 @@
 <?php
+
 $ruta=parse_url($_SERVER["REQUEST_URI"]);
 
 if(isset($ruta["query"])){
@@ -15,6 +16,7 @@ class ControladorUsuario{
 
 
   static public function ctrIngresoUsuario(){
+    error_reporting(E_ALL & ~E_WARNING); //evitar mostrar el error warning
 
     if(isset($_POST["usuario"])){
 
@@ -41,7 +43,14 @@ class ControladorUsuario{
 
 
 
+      }else{
+
+        echo '<script>
+
+document.getElementById("error-acceso").innerHTML="Credenciales de acceso no validas!!!"
+        </script>';
       }
+
     }
 
 
@@ -91,7 +100,7 @@ class ControladorUsuario{
       "perfil"=>$_POST["perfil"],  
       "nomUsuario"=>$_POST["nomUsuario"]  
     );
-    
+
     $respuesta=ModeloUsuario::mdlEditUsuario($data);
 
     echo $respuesta;

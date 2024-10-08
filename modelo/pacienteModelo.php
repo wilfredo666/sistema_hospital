@@ -52,7 +52,7 @@ class ModeloPaciente{
     $stmt=Conexion::conectar()->prepare("select * from paciente where id_paciente=$id");
     $stmt->execute();
 
-    return $stmt->fetch();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 
     $stmt->close();
     $stmt->null;
@@ -66,6 +66,7 @@ class ModeloPaciente{
     $nacPaciente=$data["nacPaciente"];
     $sexoPaciente=$data["sexoPaciente"];
     $estCivil=$data["estCivil"];
+    $estadoPaciente=$data["estadoPaciente"];
     $dirPaciente=$data["dirPaciente"];
     $procPaciente=$data["procPaciente"];
     $lugNacimiento=$data["lugNacimiento"];
@@ -79,7 +80,7 @@ class ModeloPaciente{
     $enviadoDe=$data["enviadoDe"];
     $id=$data["idPaciente"];
 
-    $stmt=Conexion::conectar()->prepare("update paciente set nombre_paciente='$nomPaciente', ap_pat_paciente='$patPaciente', ap_mat_paciente='$matPaciente', fecha_nacimiento='$nacPaciente',sexo_paciente='$sexoPaciente',lugar_nacimiento='$lugNacimiento',provincia='$provPaciente',departamento='$depPaciente',procedencia='$procPaciente',estado_civil='$estCivil',ocupacion='$ocupaPaciente',grado_instruccion='$instPaciente',diagnostico_ingreso='$diagnostico',medico_internacion='$medInternacion',matricula_medico='$matMedico',direccion_paciente='$dirPaciente',enviado_de='$enviadoDe' where id_paciente=$id");
+    $stmt=Conexion::conectar()->prepare("update paciente set nombre_paciente='$nomPaciente', ap_pat_paciente='$patPaciente', ap_mat_paciente='$matPaciente', fecha_nacimiento='$nacPaciente',sexo_paciente='$sexoPaciente',lugar_nacimiento='$lugNacimiento',provincia='$provPaciente',departamento='$depPaciente',procedencia='$procPaciente',estado_civil='$estCivil',ocupacion='$ocupaPaciente',grado_instruccion='$instPaciente',diagnostico_ingreso='$diagnostico',medico_internacion='$medInternacion',matricula_medico='$matMedico',direccion_paciente='$dirPaciente',enviado_de='$enviadoDe', estado_paciente='$estadoPaciente' where id_paciente=$id");
 
     if($stmt->execute()){
       return "ok";
@@ -122,6 +123,26 @@ traspaso paciente
     $stmt->execute();
 
     return $stmt->fetch();
+
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlInfoDatosEvOrdenesPaciente($id){
+    $stmt=Conexion::conectar()->prepare("select * from evolucion_orden where id_paciente=$id");
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlInfoTraspasosPaciente($id){
+    $stmt=Conexion::conectar()->prepare("select * from traspaso where id_paciente=$id");
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $stmt->close();
     $stmt->null;
@@ -362,6 +383,17 @@ WHERE id_historia = $idHistoria");
     $stmt->close();
     $stmt->null;
   }
+  
+   static public function mdlInfoHistoriaPaciente($id){
+    $stmt=Conexion::conectar()->prepare("select * from historia where id_paciente=$id");
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $stmt->close();
+    $stmt->null;
+  }
+
 
   static public function mdlRegNotaEvoOrd($data){
 
@@ -383,8 +415,8 @@ WHERE id_historia = $idHistoria");
 
   }
 
-  static public function mdlInfoNotasEvoOrd(){
-    $stmt=Conexion::conectar()->prepare("select * from evolucion_orden");
+  static public function mdlInfoNotasEvoOrd($idPaciente){
+    $stmt=Conexion::conectar()->prepare("select * from evolucion_orden where id_paciente=$idPaciente");
     $stmt->execute();
 
     return $stmt->fetchAll();
@@ -513,7 +545,17 @@ epicrisis
     $stmt=Conexion::conectar()->prepare("select * from epicrisis where id_epicrisis=$idEpicrisis");
     $stmt->execute();
 
-    return $stmt->fetch();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $stmt->close();
+    $stmt->null;
+  }
+  
+  static public function mdlInfoEpicrisisPaciente($idPaciente){
+    $stmt=Conexion::conectar()->prepare("select * from epicrisis where id_paciente=$idPaciente");
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 
     $stmt->close();
     $stmt->null;
@@ -599,5 +641,41 @@ WHERE
     $stmt->close();
     $stmt->null();
 
+  }
+
+  static public function mdlEliEpicrisis($id){
+    $stmt=Conexion::conectar()->prepare("delete from epicrisis where id_epicrisis=$id");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
+  }
+
+  static public function mdlMarcarRealizado($data){
+    $idEvolucion = $data["idEvolucion"];
+    $valor = $data["valor"];
+    $idenfermero = $data["idenfermero"];
+
+    $stmt=Conexion::conectar()->prepare("UPDATE evolucion_orden 
+SET 
+    realizado = '$valor',
+    id_enfermero = $idenfermero
+
+WHERE 
+    id_evolucion_orden = $idEvolucion");
+
+    if($stmt->execute()){
+      return "ok";
+    }else{
+      return "error";
+    }
+
+    $stmt->close();
+    $stmt->null();
   }
 }

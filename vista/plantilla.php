@@ -39,6 +39,7 @@ session_start();
          $_GET["ruta"]=="VEpicrisis"||
          $_GET["ruta"]=="FEpicrisis"||
          $_GET["ruta"]=="FEditEpicrisis"||
+         //$_GET["ruta"]=="RepHistorial"||
          $_GET["ruta"]=="salir"||
          $_GET["ruta"]=="VUsuario"){
         include "asideMenu.php";

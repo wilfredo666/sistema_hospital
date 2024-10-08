@@ -218,7 +218,6 @@ seccion de modals
   });
 </script>
 
-
 <!--validacion para historia clinica en sala-->
 <script>
   $(function () {
@@ -259,6 +258,7 @@ seccion de modals
         },
         pulso: {
           required: true,
+          number:true,
         },
         frec_respiratoria: {
           required: true,
@@ -401,7 +401,6 @@ seccion de modals
     });
   });
 </script>
-
 
 <!--validacion para registro epicrisis-->
 <script>

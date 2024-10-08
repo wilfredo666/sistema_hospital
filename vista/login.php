@@ -27,6 +27,7 @@
                 </div>
               </div>
             </div>
+            <p class="text-danger text-center" id="error-acceso"></p>
             <div class="row">
               <div class="col-8">
 

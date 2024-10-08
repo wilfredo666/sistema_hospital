@@ -97,14 +97,14 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
             <div class="row">
               <div class="col-sm-2">
                 <div class="form-group">
-                  <label for="p_actual">P. Actual</label>
-                  <input type="text" class="form-control" id="p_actual" name="p_actual">
+                  <label for="p_actual">Peso Actual</label>
+                  <input type="number" class="form-control" id="p_actual" name="p_actual">
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="talla">Talla</label>
-                  <input type="text" class="form-control" id="talla" name="talla">
+                  <input type="number" class="form-control" id="talla" name="talla">
                 </div>
               </div>
 
@@ -116,19 +116,19 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="temperatura">Auxiliar</label>
-                      <input type="text" class="form-control" id="auxiliar" name="auxiliar">
+                      <input type="number" class="form-control" id="auxiliar" name="auxiliar">
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="temperatura">Bucal</label>
-                      <input type="text" class="form-control" id="bucal" name="bucal">
+                      <input type="number" class="form-control" id="bucal" name="bucal">
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="temperatura">Rectal</label>
-                      <input type="text" class="form-control" id="rectal" name="rectal">
+                      <input type="number" class="form-control" id="rectal" name="rectal">
                     </div>
                   </div>
                 </fieldset>
@@ -137,13 +137,13 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="pulso">Pulso</label>
-                  <input type="text" class="form-control" id="pulso" name="pulso">
+                  <input type="number" class="form-control" id="pulso" name="pulso">
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="frec_respiratoria">Frec. Respiratoria</label>
-                  <input type="text" class="form-control" id="frec_respiratoria" name="frec_respiratoria">
+                  <input type="number" class="form-control" id="frec_respiratoria" name="frec_respiratoria">
                 </div>
               </div>
 
@@ -159,13 +159,13 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="presion_max">Máxima</label>
-                      <input type="text" class="form-control" id="presion_max" name="presion_max">
+                      <input type="number" class="form-control" id="presion_max" name="presion_max">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="presion_min">Mínima</label>
-                      <input type="text" class="form-control" id="presion_min" name="presion_min">
+                      <input type="number" class="form-control" id="presion_min" name="presion_min">
                     </div>
                   </div>
                 </fieldset>

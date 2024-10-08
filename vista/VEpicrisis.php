@@ -47,7 +47,7 @@
                       <i class="fas fa-edit"></i>
                     </a>
 
-                    <button class="btn btn-danger" onclick="FEditEpicrisis(<?php echo $value["id_epicrisis"];?>)">
+                    <button class="btn btn-danger" onclick="FEliEpicrisis(<?php echo $value["id_epicrisis"];?>)">
                       <i class="fas fa-trash"></i>
                     </button>                    
                   </div>

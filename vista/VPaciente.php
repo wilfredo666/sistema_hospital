@@ -66,8 +66,10 @@
                     <button class="btn btn-danger" onclick="MEliPaciente(<?php echo $value["id_paciente"];?>)">
                       <i class="fas fa-trash"></i>
                     </button>
-
                     <button class="btn btn-sm dropdown-toggle" data-toggle="dropdown"></button>
+                    <?php
+                if($_SESSION["perfil"]!="Enfermero"){
+                    ?>
                     <ul class="dropdown-menu">
                       <li>
                         <a href="FTraspaso?<?php echo $value['id_paciente']; ?>" class="dropdown-item">Traspaso</a>
@@ -81,7 +83,26 @@
                       <li>
                         <a href="FEpicrisis?<?php echo $value['id_paciente']; ?>" class="dropdown-item">Epicrisis</a>
                       </li>
+                      <li>
+                        <a href="vista/RepHistorial.php?id=<?php echo $value['id_paciente']; ?>" class="dropdown-item" target="_blank">Rep. Historial</a>
+                      </li>
                     </ul>
+                    <?php
+                }else{
+                    ?>
+                    <ul class="dropdown-menu">
+
+                      <li>
+                        <a href="NotasEvoOrd?<?php echo $value['id_paciente']; ?>" class="dropdown-item">Evolucion y Ordenes</a>
+                      </li>
+
+                    </ul>
+
+                    <?php
+                }
+                    ?>
+
+
 
                   </div>
                 </td>

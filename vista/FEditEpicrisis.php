@@ -24,7 +24,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($epicrisis["id_paciente"]);
 
       <div class="card card-primary">
         <div class="card-header">
-          <h4>Ejecutar Ingreso/Traspaso/Egreso</h4>
+          <h4>Epicrisis - Actualizar informacion</h4>
         </div>
         <form action="POST" id="FEditEpicrisis">
           <div class="card-body">

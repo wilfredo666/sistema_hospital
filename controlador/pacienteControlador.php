@@ -16,6 +16,8 @@ if(isset($ruta["query"])){
      $ruta["query"]=="ctrEliNotaOrden"||
      $ruta["query"]=="ctrRegEpicrisis"||
      $ruta["query"]=="ctrEditEpicrisis"||
+     $ruta["query"]=="ctrEliEpicrisis"||
+     $ruta["query"]=="ctrMarcarRealizado"||
      $ruta["query"]=="ctrEliPaciente"){
     $metodo=$ruta["query"];
     $Paciente=new ControladorPaciente();
@@ -85,6 +87,7 @@ class ControladorPaciente{
       "nacPaciente"=>$_POST["nacPaciente"],
       "sexoPaciente"=>$_POST["sexoPaciente"],
       "estCivil"=>$_POST["estCivil"],
+      "estadoPaciente"=>$_POST["estadoPaciente"],
       "dirPaciente"=>$_POST["dirPaciente"],
       "procPaciente"=>$_POST["procPaciente"],
       "lugNacimiento"=>$_POST["lugNacimiento"],
@@ -130,6 +133,11 @@ traspaso paciente
 
   static function ctrInfoTraspaso($id){
     $respuesta=ModeloPaciente::mdlInfoTraspaso($id);
+    return $respuesta;
+  }
+
+  static function ctrInfoTraspasosPaciente($id){
+    $respuesta=ModeloPaciente::mdlInfoTraspasosPaciente($id);
     return $respuesta;
   }
 
@@ -283,6 +291,11 @@ historia clinica en sala
     return $respuesta;
   }
 
+  static public function ctrInfoHistoriaPaciente($id){
+    $respuesta=ModeloPaciente::mdlInfoHistoriaPaciente($id);
+    return $respuesta;
+  }
+
   static public function edad($fecha_nacimiento) { 
     $tiempo = strtotime($fecha_nacimiento); 
     $ahora = time(); 
@@ -306,13 +319,18 @@ historia clinica en sala
     echo $respuesta;
   }
 
-  static public function ctrInfoNotasEvoOrd(){
-    $respuesta=ModeloPaciente::mdlInfoNotasEvoOrd();
+  static public function ctrInfoNotasEvoOrd($idPaciente){
+    $respuesta=ModeloPaciente::mdlInfoNotasEvoOrd($idPaciente);
     return $respuesta;
   }
 
   static public function ctrInfoNotaEvoOrd($id){
     $respuesta=ModeloPaciente::mdlInfoNotaEvoOrd($id);
+    return $respuesta;
+  }
+
+  static public function ctrInfoDatosEvOrdenesPaciente($id){
+    $respuesta=ModeloPaciente::mdlInfoDatosEvOrdenesPaciente($id);
     return $respuesta;
   }
 
@@ -344,7 +362,7 @@ epicrisis
 
   static public function ctrRegEpicrisis(){
     require "../modelo/pacienteModelo.php";
-    
+
     $data_epicrisis = array(
       "id_paciente" => $_POST["id_paciente"],
       "fecha_ingreso" => $_POST["fecha_ingreso"],
@@ -384,20 +402,25 @@ epicrisis
 
     echo $respuesta;
   }
-  
+
   static public function ctrInfoEpicrisis(){
     $respuesta=ModeloPaciente::mdlInfoEpicrisis();
     return $respuesta;
   }
-  
+
   static public function ctrInfoEpicrisi($idEpicrisis){
     $respuesta=ModeloPaciente::mdlInfoEpicrisi($idEpicrisis);
     return $respuesta;
   }
-  
-   static public function ctrEditEpicrisis(){
+
+  static public function ctrInfoEpicrisisPaciente($idPaciente){
+    $respuesta=ModeloPaciente::mdlInfoEpicrisisPaciente($idPaciente);
+    return $respuesta;
+  }
+
+  static public function ctrEditEpicrisis(){
     require "../modelo/pacienteModelo.php";
-    
+
     $data_epicrisis = array(
       "id_epicrisis" => $_POST["id_epicrisis"],
       "fecha_ingreso" => $_POST["fecha_ingreso"],
@@ -435,6 +458,27 @@ epicrisis
 
     $respuesta=ModeloPaciente::mdlEditEpicrisis($data_epicrisis);
 
+    echo $respuesta;
+  }
+
+  static public function ctrEliEpicrisis(){
+    require "../modelo/pacienteModelo.php";
+    $id=$_POST["id"];
+
+    $respuesta=ModeloPaciente::mdlEliEpicrisis($id);
+    echo $respuesta;
+  }
+
+  static public function ctrMarcarRealizado(){
+    require "../modelo/pacienteModelo.php";
+
+    $data=array(
+      "idEvolucion"=>$_POST["idEvolucion"],
+      "valor"=>$_POST["valor"],
+      "idenfermero"=>$_POST["idenfermero"]
+    );
+
+    $respuesta = ModeloPaciente::mdlMarcarRealizado($data);
     echo $respuesta;
   }
 

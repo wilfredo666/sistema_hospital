@@ -23,7 +23,7 @@ $paciente=ControladorPaciente::ctrInfoPaciente($id);
 
       <div class="card card-primary">
         <div class="card-header">
-          <h4>Ejecutar Ingreso/Traspaso/Egreso</h4>
+          <h4>Epicrisis</h4>
         </div>
         <form action="POST" id="FRegEpicrisis">
           <div class="card-body">

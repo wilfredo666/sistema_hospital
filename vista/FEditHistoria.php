@@ -99,14 +99,14 @@ $paciente=ControladorPaciente::ctrInfoPaciente($historia["id_paciente"]);
           <div class="row">
             <div class="col-sm-2">
               <div class="form-group">
-                <label for="p_actual">P. Actual</label>
-                <input type="text" class="form-control" id="p_actual" name="p_actual" value="<?php echo $historia["precion_actual"]; ?>">
+                <label for="p_actual">Peso Actual</label>
+                <input type="number" class="form-control" id="p_actual" name="p_actual" value="<?php echo $historia["precion_actual"]; ?>">
               </div>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
                 <label for="talla">Talla</label>
-                <input type="text" class="form-control" id="talla" name="talla" value="<?php echo $historia["talla"];?>">
+                <input type="number" class="form-control" id="talla" name="talla" value="<?php echo $historia["talla"];?>">
               </div>
             </div>
             <div class="col-sm-4">
@@ -117,33 +117,33 @@ $paciente=ControladorPaciente::ctrInfoPaciente($historia["id_paciente"]);
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="temperatura"> Auxiliar</label>
-                    <input type="text" class="form-control" id="auxiliar" name="auxiliar" value="<?php echo $historia["tmp_auxiliar"]; ?>">
+                    <input type="number" class="form-control" id="auxiliar" name="auxiliar" value="<?php echo $historia["tmp_auxiliar"]; ?>">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="temperatura">Bucal</label>
-                    <input type="text" class="form-control" id="bucal" name="bucal" value="<?php echo $historia["tmp_bucal"]; ?>">
+                    <input type="number" class="form-control" id="bucal" name="bucal" value="<?php echo $historia["tmp_bucal"]; ?>">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="temperatura">Rectal</label>
-                    <input type="text" class="form-control" id="rectal" name="rectal" value="<?php echo $historia["tmp_rectal"]; ?>">
+                    <input type="number" class="form-control" id="rectal" name="rectal" value="<?php echo $historia["tmp_rectal"]; ?>">
                   </div>
                 </div>
               </fieldset>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label for="pulso">Pulso</label>
+                <label for="number">Pulso</label>
                 <input type="text" class="form-control" id="pulso" name="pulso" value="<?php echo $historia["pulso"]; ?>">
               </div>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
                 <label for="frec_respiratoria">Frec. Respiratoria</label>
-                <input type="text" class="form-control" id="frec_respiratoria" name="frec_respiratoria" value="<?php echo $historia["frec_respiratoria"]; ?>">
+                <input type="number" class="form-control" id="frec_respiratoria" name="frec_respiratoria" value="<?php echo $historia["frec_respiratoria"]; ?>">
               </div>
             </div>
           </div>
@@ -156,13 +156,13 @@ $paciente=ControladorPaciente::ctrInfoPaciente($historia["id_paciente"]);
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="presion_max">Máxima</label>
-                    <input type="text" class="form-control" id="presion_max" name="presion_max" value="<?php echo $historia["presion_max"]; ?>">
+                    <input type="number" class="form-control" id="presion_max" name="presion_max" value="<?php echo $historia["presion_max"]; ?>">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="presion_min">Mínima</label>
-                    <input type="text" class="form-control" id="presion_min" name="presion_min" value="<?php echo $historia["presion_min"]; ?>">
+                    <input type="number" class="form-control" id="presion_min" name="presion_min" value="<?php echo $historia["presion_min"]; ?>">
                   </div>
                 </div>
               </fieldset>
